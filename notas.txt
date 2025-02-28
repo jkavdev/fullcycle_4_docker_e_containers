@@ -1,0 +1,33 @@
+link do repositorio do curso
+
+    https://github.com/devfullcycle/fc4-docker-na-pratica
+
+link do repositorio com todo o manual de instalacao do docker 
+
+    https://github.com/codeedu/wsl2-docker-quickstart/blob/main/README.md
+
+instalando o cmder no vscode 
+
+    https://dev.to/andrewriveradev/how-to-setup-cmder-in-vscode-in-2021-3nkc
+    
+instalando o wls no windows
+
+abrir o powershell no admin, normalmente instalara o ubuntu
+
+    wsl --install
+
+exibir todo o caminho atual
+
+    pwd
+
+exibindo as versoes que temos instaladas de linux pelo wsl
+
+    wsl -l -v
+
+integrando o ubuntu instalado pelo wsl com o docker instalado pelo docker desktop
+
+    docker desktop -> habilitar a integracao wsl -> ubuntu
+
+derrubando o wsl instalado
+
+    wsl --shutdown    

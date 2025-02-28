@@ -1,0 +1,57 @@
+executando um container docker
+    docker run - indica que vamos rodar um container
+    hello-world - indica de qual imagem o container sera criado, e executado a partir
+
+    docker run hello-world
+
+geralmente quando apenas informamos o nome da imagem a ser executada
+o docker baixa a versao mais recente da imagem `latest`
+
+    Unable to find image 'hello-world:latest' locally
+
+listando os containers em executacao
+
+    docker ps
+
+listando todos os container, ate os que nao estao rodados
+
+    docker ps -a
+
+todo container executado sempre sera uma instancia nova da instancia a ser executado, mesmo que rode o mesmo comando varias vezes    
+
+nomeando um container ao executar com `--name`, a definicao da imagem tem que ser o ultimo argumento
+
+    docker run --name hello-world hello-world
+
+podemos atribuir o valor a um parametro usando o `=`
+
+    docker run --name=hello-world hello-world    
+
+exibindo os comandos possiveis do ``docker run`` com `--help`
+
+    docker run --help
+
+rodando um comando que gera um output de texto, e a partir desse output realizar um filtro por `name`    
+
+    docker run --help | grep name
+
+depois da definicao da imagem, sao os comandos que devem ser rodados dentro do container
+no exemplo, estamos indicando para ignorar o comando padrao da imagem e rodar o nosso
+
+    docker run hello-world shell echo "hello-world"
+    
+    docker run hello-world /hello
+
+demonstrando que nao informando o comando, executara o comando padrao da imagem
+caso informado, ai substitui o comando padrao da imagem
+
+    CONTAINER ID   IMAGE                                                  COMMAND                   CREATED              STATUS                      PORTS     NAMES
+    1db2339e7506   hello-world                                            "shell bash echo hee…"    43 seconds ago       Created                               eloquent_solomon
+    34b440a0d906   hello-world                                            "/hello"                  11 minutes ago       Exited (0) 11 minutes ago             hello-world
+
+- podemos remover um container pelo id ou pelo nome do container
+por padrao nao podemos remover um container que esteja rodando, tem que ta parado para ser removido
+
+    docker rm ecstatic_tu
+
+    docker rm fe9cf5e5625c
