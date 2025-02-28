@@ -31,3 +31,99 @@ integrando o ubuntu instalado pelo wsl com o docker instalado pelo docker deskto
 derrubando o wsl instalado
 
     wsl --shutdown    
+
+executando um container docker
+
+    docker run hello-world
+
+listando os containers em execucao
+
+    docker ps
+
+listando todos os container, ate os que nao estao rodados
+
+    docker ps -a
+
+nomeando um container ao executar com `--name`, a definicao da imagem tem que ser o ultimo argumento
+
+    docker run --name hello-world hello-world
+
+podemos atribuir o valor a um parametro usando o `=`
+
+    docker run --name=hello-world hello-world    
+
+exibindo os comandos possiveis do ``docker run`` com `--help`
+
+    docker run --help
+
+rodando um comando que gera um output de texto, e a partir desse output realizar um filtro por `name`    
+
+    docker run --help | grep name
+
+depois da definicao da imagem, sao os comandos que devem ser rodados dentro do container
+no exemplo, estamos indicando para ignorar o comando padrao da imagem e rodar o nosso
+
+    docker run hello-world shell echo "hello-world"
+    
+    docker run hello-world /hello
+
+- podemos remover um container pelo id ou pelo nome do container
+por padrao nao podemos remover um container que esteja rodando, tem que ta parado para ser removido
+
+    docker rm ecstatic_tu
+
+- o correto nesses casos, seria parar o container para depois removelo
+
+    docker stop ngixx
+
+- ao parar um container, o container fica disponivel na lista de containers
+
+    docker ps -a
+
+- e para voltar a executacao desse container que esta parado, podemos inicializalo novamente
+
+    docker start ngixx
+
+- removendo um container a forca, mesmo que esteja sendo executado, sera removido
+
+    docker rm -f ngixx
+
+- rodar um container, desatachando do terminal, usamos o -d
+
+    docker run -d --name=nixx nginx
+
+- para reatachar a um container que esteja rodando
+
+    docker attach nome_container/id_container    
+
+- executando um comando em um container que esteja rodando
+
+    docker exec nome_container/id_container ls -la
+
+- entrando num container de modo iterativo usando o terminal/teclado
+
+    docker exec -it nome_container/id_container bash
+
+- podemos indicar ao rodar um container, que ao desatachar do container, o container seja removido
+
+    docker run -d --rm --name=nixx nginx
+
+- removendo varios container ao mesmo tempo    
+
+    docker rm -f nixx nixx1
+
+- combinando os comandos, e retornando apenas os ids de todos containers
+
+    docker ps -a -q
+
+- combinando os comandos, e retornando apenas os ids dos containers rodando
+
+    docker ps -q
+
+- combinando os comandos, removendo os container a partir de um subcomando
+
+    docker rm -f $(docker ps -q)
+
+- exportando a porta local para a porta do container, sempre a porta do host depois a rota do container
+
+    docker run -p 8080:80 --name ngixx nginx

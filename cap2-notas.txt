@@ -9,7 +9,7 @@ o docker baixa a versao mais recente da imagem `latest`
 
     Unable to find image 'hello-world:latest' locally
 
-listando os containers em executacao
+listando os containers em execucao
 
     docker ps
 
@@ -55,3 +55,73 @@ por padrao nao podemos remover um container que esteja rodando, tem que ta parad
     docker rm ecstatic_tu
 
     docker rm fe9cf5e5625c
+
+- se tentarmos remover um container que esteja rodando vai da erro indicando que ele ta rodando
+
+    Error response from daemon: cannot remove container "/ngixx": container is running: stop the container before removing or force remove
+
+- o correto nesses casos, seria parar o container para depois removelo
+
+    docker stop ngixx
+
+- ao parar um container, o container fica disponivel na lista de containers
+
+    docker ps -a
+
+- e para voltar a executacao desse container que esta parado, podemos inicializalo novamente
+
+    docker start ngixx
+
+- removendo um container a forca, mesmo que esteja sendo executado, sera removido
+
+    docker rm -f ngixx
+
+## aula 5    
+
+- rodar um container, desatachando do terminal, usamos o -d
+
+    docker run -d --name=nixx nginx
+
+- para reatachar a um container que esteja rodando
+
+    docker attach nome_container/id_container    
+
+- executando um comando em um container que esteja rodando
+
+    docker exec nome_container/id_container ls -la
+
+- entrando num container de modo iterativo usando o terminal/teclado
+
+    docker exec -i -t nome_container/id_container bash
+
+    docker exec -it nome_container/id_container bash
+
+- podemos indicar ao rodar um container, que ao desatachar do container, o container seja removido
+
+    docker run -d --rm --name=nixx nginx
+
+- removendo varios container ao mesmo tempo    
+
+    docker -rm nix nix1 nix2
+
+    docker rm -f nixx nixx1
+
+## aula 7
+
+- combinando os comandos, e retornando apenas os ids de todos containers
+
+    docker ps -a -q
+
+- combinando os comandos, e retornando apenas os ids dos containers rodando
+
+    docker ps -q
+
+- combinando os comandos, removendo os container a partir de um subcomando
+- era pra funcionar, mas nao funciona kkk
+
+    docker rm -f $(docker ps -q)
+
+## aula 8    
+- exportando a porta local para a porta do container, sempre a porta do host depois a rota do container
+
+    docker run -p 8080:80 --name ngixx nginx
